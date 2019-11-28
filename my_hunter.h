@@ -31,8 +31,14 @@ typedef struct sprite_c
     sfSprite* karim2;
     sfSprite* karim3;
     sfSprite* game_over;
-    sfFont* font;
-    sfText* text;
+    sfSprite* option;
+    sfFont* font_game_over;
+    sfFont* font_tuto;
+    sfText* text_game_over;
+    sfText* text_tuto_explication;
+    sfText* text_tuto_life;
+    sfText* text_tuto_zombie;
+    sfText* text_tuto_zombie_explication;
     sfMusic* music_game;
     sfIntRect rect_heal;
     int statut;

@@ -77,10 +77,14 @@ void    manage_mouse_click(sfMouseButtonEvent event, coords_t *coords, sfRenderW
 {
     sfVector2i mouse = sfMouse_getPositionRenderWindow(window);
 
-    if (mouse.x <= coords->x + 68 && mouse.x >= coords->x && mouse.y <= coords->y + 100 && mouse.y >= coords->y) {
+    if (mouse.x <= coords->x + 68 && mouse.x >= coords->x && mouse.y <= coords->y + 100 && mouse.y >= coords->y && sprite->statut == 0) {
         coords->x = 1100;
         coords->y = line(line_random());
     }
+    if (mouse.x <= coords->x + 68 && mouse.x >= coords->x && mouse.y <= coords->y + 100 && mouse.y >= coords->y && sprite->statut == 2)
+        sprite->statut = 0;
+    if (mouse.x <= 1100 && mouse.x >= 1000 && mouse.y <= 100 && mouse.y >= 0)
+        sprite->statut = 2;
 }
 
 void    analyse_events(sfRenderWindow *window, sfEvent event, coords_t *coords, sprite_t *sprite)
@@ -158,6 +162,25 @@ sfSprite    *my_backgrd(sfRenderWindow *window)
     sfSprite_setTextureRect(backgrd, rect_backgrd);
     sfSprite_setPosition(backgrd, backgrd_position);
     return (backgrd);
+}
+
+sfSprite    *my_option(sfRenderWindow *window)
+{
+    sfIntRect rect_option;
+    sfSprite* option;
+    sfTexture* option_texture;
+    sfVector2f option_position = {1000, 0};
+
+    rect_option.top = 700;
+    rect_option.left = 0;
+    rect_option.width = 100;
+    rect_option.height = 100;
+    option_texture = sfTexture_createFromFile("sprite/zombie_sheet.png", NULL);
+    option = sfSprite_create();
+    sfSprite_setTexture(option, option_texture, sfTrue);
+    sfSprite_setTextureRect(option, rect_option);
+    sfSprite_setPosition(option, option_position);
+    return (option);
 }
 
 sfSprite    *my_game_over(sfRenderWindow *window)
@@ -299,14 +322,20 @@ void    destroy_sprite(sfRenderWindow *window, sprite_t sprite)
     sfSprite_destroy(sprite.zombie);
     sfSprite_destroy(sprite.cursor);
     sfSprite_destroy(sprite.backgrd);
+    sfSprite_destroy(sprite.option);
     sfSprite_destroy(sprite.game_over);
     sfSprite_destroy(sprite.healt);
     sfSprite_destroy(sprite.karim1);
     sfSprite_destroy(sprite.karim2);
     sfSprite_destroy(sprite.karim3);
     sfMusic_destroy(sprite.music_game);
-    sfFont_destroy(sprite.font);
-    sfText_destroy(sprite.text);
+    sfFont_destroy(sprite.font_game_over);
+    sfText_destroy(sprite.text_game_over);
+    sfFont_destroy(sprite.font_tuto);
+    sfText_destroy(sprite.text_tuto_explication);
+    sfText_destroy(sprite.text_tuto_life);
+    sfText_destroy(sprite.text_tuto_zombie);
+    sfText_destroy(sprite.text_tuto_zombie_explication);
     sfRenderWindow_destroy(window);
 }
 
@@ -318,6 +347,7 @@ void    draw_sprite(sfRenderWindow *window, sprite_t *sprite, coords_t *coords)
 
     sfRenderWindow_clear(window, sfBlack);
     sfRenderWindow_drawSprite(window, sprite->backgrd, NULL);
+    sfRenderWindow_drawSprite(window, sprite->option, NULL);
     sfRenderWindow_drawSprite(window, sprite->zombie, NULL);
     sfSprite_setPosition(sprite->zombie, zombie_pos);
     sfRenderWindow_drawSprite(window, sprite->healt, NULL);
@@ -342,6 +372,7 @@ void    my_set_sprites(sprite_t *sprites, clock_d *clock, coords_t *coords, sfRe
     coords->x = 1050;
     coords->y = line(line_random());
     sprites->backgrd = my_backgrd(window);
+    sprites->option = my_option(window);
     sprites->game_over = my_game_over(window);
     sprites->zombie = my_sprite_sheet_zombie(coords);
     sprites->cursor = my_sprite_sheet_cursor(window);
@@ -349,6 +380,13 @@ void    my_set_sprites(sprite_t *sprites, clock_d *clock, coords_t *coords, sfRe
     sprites->karim1 = my_sprite_sheet_karim1(window);
     sprites->karim2 = my_sprite_sheet_karim2(window);
     sprites->karim3 = my_sprite_sheet_karim3(window);
+    sprites->font_tuto = sfFont_createFromFile("sprite/the_day_is_my_enemy.ttf");
+    sprites->text_tuto_explication = sfText_create();
+    sprites->text_tuto_life = sfText_create();
+    sprites->text_tuto_zombie = sfText_create();
+    sprites->text_tuto_zombie_explication = sfText_create();
+    sprites->font_game_over = sfFont_createFromFile("sprite/Madjoe.ttf");
+    sprites->text_game_over = sfText_create();
     sprites->music_game = sfMusic_createFromFile("sprite/playing.ogg");
 }
 
@@ -356,13 +394,11 @@ void    display_game_over(sprite_t *sprite)
 {
     sfVector2f game_over_position = {250, 120};
 
-    sprite->font = sfFont_createFromFile("sprite/Madjoe.ttf");
-    sprite->text = sfText_create();
-    sfText_setString(sprite->text, "\tgame over  \npress R to restart");
-    sfText_setFont(sprite->text, sprite->font);
-    sfText_setCharacterSize(sprite->text, 100);
-    sfText_setColor(sprite->text, sfRed);
-    sfText_setPosition(sprite->text, game_over_position);
+    sfText_setString(sprite->text_game_over, "\t\tgame over  \npress R to restart");
+    sfText_setFont(sprite->text_game_over, sprite->font_game_over);
+    sfText_setCharacterSize(sprite->text_game_over, 100);
+    sfText_setColor(sprite->text_game_over, sfRed);
+    sfText_setPosition(sprite->text_game_over, game_over_position);
 }
 
 void    draw_game_over(sfRenderWindow *window, sprite_t *sprite, coords_t *coords)
@@ -372,10 +408,85 @@ void    draw_game_over(sfRenderWindow *window, sprite_t *sprite, coords_t *coord
 
     sfRenderWindow_clear(window, sfBlack);
     sfRenderWindow_drawSprite(window, sprite->game_over, NULL);
+    display_game_over(sprite);
+    sfRenderWindow_drawText(window, sprite->text_game_over, NULL);
+    sfSprite_setPosition(sprite->cursor, mouse_2);
+    sfRenderWindow_drawSprite(window, sprite->cursor, NULL);
+    sfRenderWindow_display(window);
+}
+
+void    draw_tuto_explication(sprite_t *sprite)
+{
+    sfVector2f tuto_explication = {0, 0};
+
+    sfText_setString(sprite->text_tuto_explication, "\t\t\tWelcome to my game everyone\n\nwhat is goal ? you see 3 little Karim ? SAVE HIM?!?\n\tNow kill zombie for stat game");
+    sfText_setFont(sprite->text_tuto_explication, sprite->font_tuto);
+    sfText_setCharacterSize(sprite->text_tuto_explication, 30);
+    sfText_setColor(sprite->text_tuto_explication, sfBlue);
+    sfText_setPosition(sprite->text_tuto_explication, tuto_explication);
+}
+
+void    draw_tuto_life(sprite_t *sprite)
+{
+    sfVector2f tuto_life = {220, 520};
+
+    sfText_setString(sprite->text_tuto_life, "<- you have 3 life be carefull !");
+    sfText_setFont(sprite->text_tuto_life, sprite->font_tuto);
+    sfText_setCharacterSize(sprite->text_tuto_life, 40);
+    sfText_setColor(sprite->text_tuto_life, sfRed);
+    sfText_setPosition(sprite->text_tuto_life, tuto_life);
+}
+
+void    draw_tuto_zombie(sprite_t *sprite)
+{
+    sfVector2f tuto_zombie = {1000, 120};
+
+    sfText_setString(sprite->text_tuto_zombie, "->\n\n\n->\n\n\n\n->");
+    sfText_setFont(sprite->text_tuto_zombie, sprite->font_tuto);
+    sfText_setCharacterSize(sprite->text_tuto_zombie, 40);
+    sfText_setColor(sprite->text_tuto_zombie, sfYellow);
+    sfText_setPosition(sprite->text_tuto_zombie, tuto_zombie);
+}
+
+void    draw_tuto_zombie_explication(sprite_t *sprite)
+{
+    sfVector2f tuto_zombie = {520, 260};
+
+    sfText_setString(sprite->text_tuto_zombie_explication, "\t\tzombies will spawn here\n now click on the zombie for kill him");
+    sfText_setFont(sprite->text_tuto_zombie_explication, sprite->font_tuto);
+    sfText_setCharacterSize(sprite->text_tuto_zombie_explication, 30);
+    sfText_setColor(sprite->text_tuto_zombie_explication, sfYellow);
+    sfText_setPosition(sprite->text_tuto_zombie_explication, tuto_zombie);
+}
+
+void    display_tuto(sprite_t *sprite)
+{
+    draw_tuto_explication(sprite);
+    draw_tuto_life(sprite);
+    draw_tuto_zombie(sprite);
+    draw_tuto_zombie_explication(sprite);
+}
+
+void    draw_tuto(sfRenderWindow *window, sprite_t *sprite, coords_t *coords)
+{
+    sfVector2i mouse = sfMouse_getPositionRenderWindow(window);
+    sfVector2f mouse_2 = {mouse.x - 77, mouse.y - 78};
+    sfVector2f zombie_pos = {coords->x, coords->y};
+
+    sfRenderWindow_clear(window, sfBlack);
+    sfRenderWindow_drawSprite(window, sprite->backgrd, NULL);
+    sfRenderWindow_drawSprite(window, sprite->zombie, NULL);
+    sfRenderWindow_drawSprite(window, sprite->healt, NULL);
+    sfRenderWindow_drawSprite(window, sprite->karim1, NULL);
+    sfRenderWindow_drawSprite(window, sprite->karim2, NULL);
+    sfRenderWindow_drawSprite(window, sprite->karim3, NULL);
+    display_tuto(sprite);
+    sfRenderWindow_drawText(window, sprite->text_tuto_explication, NULL);
+    sfRenderWindow_drawText(window, sprite->text_tuto_life, NULL);
+    sfRenderWindow_drawText(window, sprite->text_tuto_zombie, NULL);
+    sfRenderWindow_drawText(window, sprite->text_tuto_zombie_explication, NULL);
     sfRenderWindow_drawSprite(window, sprite->cursor, NULL);
     sfSprite_setPosition(sprite->cursor, mouse_2);
-    display_game_over(sprite);
-    sfRenderWindow_drawText(window, sprite->text, NULL);
     sfRenderWindow_display(window);
 }
 
@@ -385,8 +496,8 @@ void    draw_statue(sfRenderWindow *window, sprite_t *sprite, coords_t *coords)
         draw_sprite(window, sprite, coords);
     if (sprite->statut == 1)
         draw_game_over(window, sprite, coords);
-    //if (sprite->statut == 2)
-    //    draw_tuto();
+    if (sprite->statut == 2)
+        draw_tuto(window, sprite, coords);
 }
 
 void    initalise_value(sprite_t *sprite, sfIntRect *rect_zombie)
@@ -398,7 +509,7 @@ void    initalise_value(sprite_t *sprite, sfIntRect *rect_zombie)
 
 void    display_man(sprite_t *sprite)
 {
-    sprite->statut = 1;
+    sprite->statut = 2;
 }
 
 int    main(int ac, char **av)
