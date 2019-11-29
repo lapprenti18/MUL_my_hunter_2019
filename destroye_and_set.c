@@ -16,6 +16,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+void    destroy_sprite2(sfRenderWindow *window, sprite_t sprite)
+{
+    sfText_destroy(sprite.text_tuto_explication);
+    sfText_destroy(sprite.text_tuto_life);
+    sfText_destroy(sprite.text_tuto_zombie);
+    sfText_destroy(sprite.text_tuto_zombie_explication);
+    sfText_destroy(sprite.setting);
+}
+
 void    destroy_sprite(sfRenderWindow *window, sprite_t sprite)
 {
     sfSprite_destroy(sprite.zombie);
@@ -27,15 +36,26 @@ void    destroy_sprite(sfRenderWindow *window, sprite_t sprite)
     sfSprite_destroy(sprite.karim1);
     sfSprite_destroy(sprite.karim2);
     sfSprite_destroy(sprite.karim3);
+    sfSprite_destroy(sprite.menu_option);
+    sfSprite_destroy(sprite.menu_start);
     sfMusic_destroy(sprite.music_game);
     sfFont_destroy(sprite.font_game_over);
     sfText_destroy(sprite.text_game_over);
     sfFont_destroy(sprite.font_tuto);
-    sfText_destroy(sprite.text_tuto_explication);
-    sfText_destroy(sprite.text_tuto_life);
-    sfText_destroy(sprite.text_tuto_zombie);
-    sfText_destroy(sprite.text_tuto_zombie_explication);
+    destroy_sprite2(window, sprite);
     sfRenderWindow_destroy(window);
+}
+
+void    my_set_sprites2(sprite_t *sprites, clock_d *clock, \
+coords_t *coords, sfRenderWindow *window)
+{
+    sprites->text_game_over = sfText_create();
+    sprites->music_game = sfMusic_createFromFile("sprite/playing.ogg");
+    sprites->font_option_key = sfFont_createFromFile("sprite/212-Keyboard.ttf");
+    sprites->text_option_key = sfText_create();
+    sprites->font_option_text = sfFont_createFromFile("sprite/Kid-Knowledge-1.ttf");
+    sprites->text_option_text = sfText_create();
+    sprites->setting = sfText_create();
 }
 
 void    my_set_sprites(sprite_t *sprites, clock_d *clock, coords_t *coords, sfRenderWindow *window)
@@ -44,6 +64,7 @@ void    my_set_sprites(sprite_t *sprites, clock_d *clock, coords_t *coords, sfRe
     coords->x = 1050;
     coords->y = line(line_random());
     sprites->backgrd = my_backgrd(window);
+    sprites->menu_start = my_menu_start(window);
     sprites->option = my_option(window);
     sprites->game_over = my_game_over(window);
     sprites->zombie = my_sprite_sheet_zombie(coords);
@@ -52,12 +73,12 @@ void    my_set_sprites(sprite_t *sprites, clock_d *clock, coords_t *coords, sfRe
     sprites->karim1 = my_sprite_sheet_karim1(window);
     sprites->karim2 = my_sprite_sheet_karim2(window);
     sprites->karim3 = my_sprite_sheet_karim3(window);
+    sprites->menu_option = my_menu_option(window);
     sprites->font_tuto = sfFont_createFromFile("sprite/the_day_is_my_enemy.ttf");
+    sprites->font_game_over = sfFont_createFromFile("sprite/Madjoe.ttf");
     sprites->text_tuto_explication = sfText_create();
     sprites->text_tuto_life = sfText_create();
     sprites->text_tuto_zombie = sfText_create();
     sprites->text_tuto_zombie_explication = sfText_create();
-    sprites->font_game_over = sfFont_createFromFile("sprite/Madjoe.ttf");
-    sprites->text_game_over = sfText_create();
-    sprites->music_game = sfMusic_createFromFile("sprite/playing.ogg");
+    my_set_sprites2(sprites, clock, coords, window);
 }

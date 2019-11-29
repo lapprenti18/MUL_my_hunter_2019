@@ -32,8 +32,15 @@ typedef struct sprite_c
     sfSprite* karim3;
     sfSprite* game_over;
     sfSprite* option;
+    sfSprite* menu_option;
+    sfSprite* menu_start;
     sfFont* font_game_over;
     sfFont* font_tuto;
+    sfFont* font_option_text;
+    sfFont* font_option_key;
+    sfText* text_option_text;
+    sfText* text_option_key;
+    sfText* setting;
     sfText* text_game_over;
     sfText* text_tuto_explication;
     sfText* text_tuto_life;
@@ -43,6 +50,7 @@ typedef struct sprite_c
     sfIntRect rect_heal;
     int statut;
     int volume;
+    int menu_opt;
 } sprite_t;
 
 typedef struct clock_t
@@ -94,16 +102,11 @@ void    initalise_value(sprite_t *sprite, sfIntRect *rect_zombie);
 void    draw_statue(sfRenderWindow *window, sprite_t *sprite, coords_t *coords);
 void    draw_tuto(sfRenderWindow *window, sprite_t *sprite, coords_t *coords);
 int    main(int ac, char **av);
-
-/*typedef struct enum
-{
-    sfJoystickX,
-    sfJoystickY,
-    sfJoystickZ,
-    sfJoystickR,
-    sfJoystickU,
-    sfJoystickV,
-    sfJoystickPovX,
-    sfJoystickPovY
-    || sfJoystick_isButtonPressed(sfJoystickAxis, sfKeyA)
-} sfJoystickAxis;*/
+sfSprite    *my_menu_option(sfRenderWindow *window);
+void    draw_option(sfRenderWindow *window, sprite_t *sprite, coords_t *coords);
+void    my_set_sprites2(sprite_t *sprites, clock_d *clock, coords_t *coords, sfRenderWindow *window);
+void    destroy_sprite2(sfRenderWindow *window, sprite_t sprite);
+void    display_help_menu(sprite_t *sprite);
+void    my_setting(sprite_t *sprite);
+sfSprite    *my_menu_start(sfRenderWindow *window);
+void    draw_start_menu(sfRenderWindow *window, sprite_t *sprite, coords_t *coords);

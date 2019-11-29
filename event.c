@@ -34,6 +34,8 @@ void    manage_mouse_click(sfMouseButtonEvent event, coords_t *coords, sfRenderW
     if (mouse.x <= coords->x + 68 && mouse.x >= coords->x && mouse.y <= coords->y + 100 && mouse.y >= coords->y && sprite->statut == 2)
         sprite->statut = 0;
     if (mouse.x <= 1100 && mouse.x >= 1000 && mouse.y <= 100 && mouse.y >= 0)
+        sprite->statut = 3;
+    if (mouse.x <= 935 && mouse.x >= 526 && mouse.y <= 453 && mouse.y >= 354 && sprite->statut == 4)
         sprite->statut = 2;
 }
 
@@ -50,5 +52,9 @@ void    analyse_events(sfRenderWindow *window, sfEvent event, coords_t *coords, 
         sprite->volume -= 5;
     if (sfKeyboard_isKeyPressed(sfKeyC))
         sprite->volume += 5;
+    if (sfKeyboard_isKeyPressed(sfKeyM) && sprite->statut == 0)
+        sprite->statut = 3;
+    if (sfKeyboard_isKeyPressed(sfKeyQ) && sprite->statut == 3)
+        sprite->statut = 0;
     sfMusic_setVolume(sprite->music_game, sprite->volume);
 }

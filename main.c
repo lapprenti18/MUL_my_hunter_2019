@@ -20,7 +20,7 @@ void    initalise_value(sprite_t *sprite, sfIntRect *rect_zombie)
 {
     rect_zombie->left = 0;
     sprite->volume = 100;
-    sprite->statut = 0;
+    sprite->statut = 4;
 }
 
 void    display_man(sprite_t *sprite)
