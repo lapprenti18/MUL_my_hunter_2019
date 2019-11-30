@@ -27,7 +27,8 @@ sfSprite    *my_game_over(sfRenderWindow *window)
     rect_game_over.left = 0;
     rect_game_over.width = 1110;
     rect_game_over.height = 600;
-    game_over_texture = sfTexture_createFromFile("sprite/backgd_gameover.png", NULL);
+    game_over_texture = sfTexture_createFromFile\
+    ("sprite/backgd_gameover.png", NULL);
     game_over = sfSprite_create();
     sfSprite_setTexture(game_over, game_over_texture, sfTrue);
     sfSprite_setTextureRect(game_over, rect_game_over);

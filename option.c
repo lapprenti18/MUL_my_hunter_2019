@@ -46,7 +46,8 @@ sfSprite    *my_menu_option(sfRenderWindow *window)
     rect_menu_option.left = 1140;
     rect_menu_option.width = 446;
     rect_menu_option.height = 471;
-    menu_option_texture = sfTexture_createFromFile("sprite/zombie_sheet.png", NULL);
+    menu_option_texture = sfTexture_createFromFile\
+    ("sprite/zombie_sheet.png", NULL);
     menu_option = sfSprite_create();
     sfSprite_setTexture(menu_option, menu_option_texture, sfTrue);
     sfSprite_setTextureRect(menu_option, rect_menu_option);

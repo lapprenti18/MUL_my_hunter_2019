@@ -16,7 +16,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void    move_rect(sfIntRect *rect, int offset, sprite_t *sprite, coords_t *coords)
+void    move_rect(sfIntRect *rect, int offset, sprite_t *sprite, \
+coords_t *coords)
 {
     sfVector2f pos = {coords->x, coords->y};
 
@@ -32,7 +33,8 @@ void    move_rect(sfIntRect *rect, int offset, sprite_t *sprite, coords_t *coord
 }
 
 
-void    my_clock(sfIntRect *rect, coords_t *coords, clock_d clock, sprite_t *sprite)
+void    my_clock(sfIntRect *rect, coords_t *coords, clock_d clock, \
+sprite_t *sprite)
 {
     while (clock.second < 0.05)
     {

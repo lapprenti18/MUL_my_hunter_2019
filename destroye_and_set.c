@@ -51,14 +51,19 @@ coords_t *coords, sfRenderWindow *window)
 {
     sprites->text_game_over = sfText_create();
     sprites->music_game = sfMusic_createFromFile("sprite/playing.ogg");
-    sprites->font_option_key = sfFont_createFromFile("sprite/212-Keyboard.ttf");
+    sprites->font_option_key = sfFont_createFromFile\
+    ("sprite/212-Keyboard.ttf");
     sprites->text_option_key = sfText_create();
-    sprites->font_option_text = sfFont_createFromFile("sprite/Kid-Knowledge-1.ttf");
+    sprites->font_option_text = sfFont_createFromFile\
+    ("sprite/Kid-Knowledge-1.ttf");
     sprites->text_option_text = sfText_create();
     sprites->setting = sfText_create();
+    sprites->text_tuto_zombie = sfText_create();
+    sprites->text_tuto_zombie_explication = sfText_create();
 }
 
-void    my_set_sprites(sprite_t *sprites, clock_d *clock, coords_t *coords, sfRenderWindow *window)
+void    my_set_sprites(sprite_t *sprites, clock_d *clock, coords_t *coords, \
+sfRenderWindow *window)
 {
     clock->second = 0;
     coords->x = 1050;
@@ -74,11 +79,10 @@ void    my_set_sprites(sprite_t *sprites, clock_d *clock, coords_t *coords, sfRe
     sprites->karim2 = my_sprite_sheet_karim2(window);
     sprites->karim3 = my_sprite_sheet_karim3(window);
     sprites->menu_option = my_menu_option(window);
-    sprites->font_tuto = sfFont_createFromFile("sprite/the_day_is_my_enemy.ttf");
+    sprites->font_tuto = sfFont_createFromFile\
+    ("sprite/the_day_is_my_enemy.ttf");
     sprites->font_game_over = sfFont_createFromFile("sprite/Madjoe.ttf");
     sprites->text_tuto_explication = sfText_create();
     sprites->text_tuto_life = sfText_create();
-    sprites->text_tuto_zombie = sfText_create();
-    sprites->text_tuto_zombie_explication = sfText_create();
     my_set_sprites2(sprites, clock, coords, window);
 }

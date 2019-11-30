@@ -33,7 +33,8 @@ void    draw_tuto(sfRenderWindow *window, sprite_t *sprite, coords_t *coords)
     sfRenderWindow_drawText(window, sprite->text_tuto_explication, NULL);
     sfRenderWindow_drawText(window, sprite->text_tuto_life, NULL);
     sfRenderWindow_drawText(window, sprite->text_tuto_zombie, NULL);
-    sfRenderWindow_drawText(window, sprite->text_tuto_zombie_explication, NULL);
+    sfRenderWindow_drawText(window, sprite->text_tuto_zombie_explication, \
+    NULL);
     sfRenderWindow_drawSprite(window, sprite->cursor, NULL);
     sfSprite_setPosition(sprite->cursor, mouse_2);
     sfRenderWindow_display(window);

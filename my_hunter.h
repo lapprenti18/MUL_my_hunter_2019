@@ -48,11 +48,12 @@ typedef struct sprite_c
     sfText* text_tuto_zombie_explication;
     sfMusic* music_game;
     sfIntRect rect_heal;
+    float zombie_deplacement;
     int statut;
     int volume;
-    float zombie_deplacement;
     int mode_of_the_game;
     int zombie_heal;
+    int score;
 } sprite_t;
 
 typedef struct clock_t
@@ -70,47 +71,108 @@ typedef struct all_struct
 } all_struct_t;
 
 void    move_life(sprite_t *sprite, int offset);
+
 void    reset_zombie(coords_t *coords, sprite_t *sprite);
+
 int    line_random(void);
+
 int    line(int line);
+
 void    close_windows(sfRenderWindow *window);
-void    manage_mouse_click(sfMouseButtonEvent event, coords_t *coords, sfRenderWindow *window, sprite_t *sprite);
-void    analyse_events(sfRenderWindow *window, sfEvent event, coords_t *coords, sprite_t *sprite);
+
+void    manage_mouse_click(sfMouseButtonEvent event, coords_t *coords, \
+sfRenderWindow *window, sprite_t *sprite);
+
+void    analyse_events(sfRenderWindow *window, sfEvent event, \
+
+coords_t *coords, sprite_t *sprite);
+
 sfSprite    *my_sprite_sheet_zombie(coords_t *coords);
+
 sfSprite    *my_sprite_sheet_cursor(sfRenderWindow *window);
+
 sfSprite    *my_backgrd(sfRenderWindow *window);
+
 sfSprite    *my_option(sfRenderWindow *window);
+
 sfSprite    *my_game_over(sfRenderWindow *window);
+
 sfSprite    *my_sprite_sheet_health(sfRenderWindow *window);
+
 sfSprite    *my_sprite_sheet_karim1(sfRenderWindow *window);
+
 sfSprite    *my_sprite_sheet_karim2(sfRenderWindow *window);
+
 void    destroy_sprite(sfRenderWindow *window, sprite_t sprite);
+
 sfRenderWindow    *windows(void);
-void    my_clock(sfIntRect *rect, coords_t *coords, clock_d clock, sprite_t *sprite);
-void    move_rect(sfIntRect *rect, int offset, sprite_t *sprite, coords_t *coords);
+
+void    my_clock(sfIntRect *rect, coords_t *coords, clock_d clock, \
+sprite_t *sprite);
+
+void    move_rect(sfIntRect *rect, int offset, sprite_t *sprite, \
+coords_t *coords);
+
 sfSprite    *my_sprite_sheet_karim3(sfRenderWindow *window);
-void    draw_game_over(sfRenderWindow *window, sprite_t *sprite, coords_t *coords);
+
+void    draw_game_over(sfRenderWindow *window, sprite_t *sprite, \
+
+coords_t *coords);
+
 void    display_game_over(sprite_t *sprite);
-void    my_set_sprites(sprite_t *sprites, clock_d *clock, coords_t *coords, sfRenderWindow *window);
-void    Event(sfRenderWindow *window, sfEvent event, coords_t *coords, sprite_t *sprite);
+
+void    my_set_sprites(sprite_t *sprites, clock_d *clock, coords_t *coords, \
+sfRenderWindow *window);
+
+void    Event(sfRenderWindow *window, sfEvent event, coords_t \
+*coords, sprite_t *sprite);
+
 void    draw_sprite(sfRenderWindow *window, sprite_t *sprite, coords_t *coords);
+
 void    display_tuto(sprite_t *sprite);
+
 void    draw_tuto_zombie_explication(sprite_t *sprite);
+
 void    draw_tuto_zombie(sprite_t *sprite);
+
 void    draw_tuto_life(sprite_t *sprite);
+
 void    draw_tuto_explication(sprite_t *sprite);
+
 void    display_man(sprite_t *sprite);
+
 void    initalise_value(sprite_t *sprite, sfIntRect *rect_zombie);
+
 void    draw_statue(sfRenderWindow *window, sprite_t *sprite, coords_t *coords);
+
 void    draw_tuto(sfRenderWindow *window, sprite_t *sprite, coords_t *coords);
+
 int    main(int ac, char **av);
+
 sfSprite    *my_menu_option(sfRenderWindow *window);
+
 void    draw_option(sfRenderWindow *window, sprite_t *sprite, coords_t *coords);
-void    my_set_sprites2(sprite_t *sprites, clock_d *clock, coords_t *coords, sfRenderWindow *window);
+
+void    my_set_sprites2(sprite_t *sprites, clock_d *clock, coords_t *coords, \
+sfRenderWindow *window);
+
 void    destroy_sprite2(sfRenderWindow *window, sprite_t sprite);
+
 void    display_help_menu(sprite_t *sprite);
+
 void    my_setting(sprite_t *sprite);
+
 sfSprite    *my_menu_start(sfRenderWindow *window);
-void    draw_start_menu(sfRenderWindow *window, sprite_t *sprite, coords_t *coords);
+
+void    draw_start_menu(sfRenderWindow *window, sprite_t *sprite, \
+coords_t *coords);
+
 void    reset_zombie_easy_meduim(coords_t *coords, sprite_t *sprite);
+
+void    event_click1(sfMouseButtonEvent event, coords_t *coords, \
+sfRenderWindow *window, sprite_t *sprite);
+
+void    event_click2(sfMouseButtonEvent event, coords_t *coords, \
+sfRenderWindow *window, sprite_t *sprite);
+
 void    reset_zombie_hard(coords_t *coords, sprite_t *sprite);

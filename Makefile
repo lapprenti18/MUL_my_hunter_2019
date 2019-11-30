@@ -17,6 +17,9 @@ SRC	=	clock.c	\
 		sprite_zombie_and_cursor.c	\
 		statue.c	\
 		tuto.c	\
+		draw_menu.c	\
+		reset_zomb.c	\
+		sprite_start.c	\
 
 NAME	=	my_hunter
 

@@ -23,7 +23,6 @@ sfRenderWindow    *windows(void)
 
     window = sfRenderWindow_create(mode, "SFML window", sfDefaultStyle, NULL);
     sfRenderWindow_setFramerateLimit(window, 60);
-    sfRenderWindow_setKeyRepeatEnabled(window ,sfTrue);
 
     return (window);
 }
