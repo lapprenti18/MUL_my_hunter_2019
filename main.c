@@ -24,6 +24,7 @@ void    initalise_value(sprite_t *sprite, sfIntRect *rect_zombie)
     sprite->zombie_deplacement = 5;
     sprite->mode_of_the_game = 0;
     sprite->zombie_heal = 3;
+    sprite->score = 0;
 }
 
 void    display_man(sprite_t *sprite)
@@ -48,7 +49,7 @@ int    main(int ac, char **av)
     if (ac == 2)
         display_man(&sprite);
     while (sfRenderWindow_isOpen(window)) {
-        Event(window, event, &coords, &sprite);
+        global_event(window, event, &coords, &sprite);
         my_clock(&rect_zombie, &coords, Clock, &sprite);
         draw_statue(window, &sprite, &coords);
     }

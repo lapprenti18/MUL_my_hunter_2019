@@ -46,6 +46,8 @@ typedef struct sprite_c
     sfText* text_tuto_life;
     sfText* text_tuto_zombie;
     sfText* text_tuto_zombie_explication;
+    sfText* display_score;
+    sfText* word_score;
     sfMusic* music_game;
     sfIntRect rect_heal;
     float zombie_deplacement;
@@ -84,7 +86,6 @@ void    manage_mouse_click(sfMouseButtonEvent event, coords_t *coords, \
 sfRenderWindow *window, sprite_t *sprite);
 
 void    analyse_events(sfRenderWindow *window, sfEvent event, \
-
 coords_t *coords, sprite_t *sprite);
 
 sfSprite    *my_sprite_sheet_zombie(coords_t *coords);
@@ -124,7 +125,7 @@ void    display_game_over(sprite_t *sprite);
 void    my_set_sprites(sprite_t *sprites, clock_d *clock, coords_t *coords, \
 sfRenderWindow *window);
 
-void    Event(sfRenderWindow *window, sfEvent event, coords_t \
+void    global_event(sfRenderWindow *window, sfEvent event, coords_t \
 *coords, sprite_t *sprite);
 
 void    draw_sprite(sfRenderWindow *window, sprite_t *sprite, coords_t *coords);
@@ -175,4 +176,13 @@ sfRenderWindow *window, sprite_t *sprite);
 void    event_click2(sfMouseButtonEvent event, coords_t *coords, \
 sfRenderWindow *window, sprite_t *sprite);
 
+void    key_press(sfRenderWindow *window, sfEvent event, \
+coords_t *coords, sprite_t *sprite);
+
 void    reset_zombie_hard(coords_t *coords, sprite_t *sprite);
+
+char *int_to_string(int num);
+
+void    display_score(sprite_t *sprite);
+
+void    display_score_game_over(sprite_t *sprite);

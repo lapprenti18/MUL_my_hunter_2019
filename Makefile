@@ -20,6 +20,8 @@ SRC	=	clock.c	\
 		draw_menu.c	\
 		reset_zomb.c	\
 		sprite_start.c	\
+		analyse_event.c	\
+		int_to_string.c	\
 
 NAME	=	my_hunter
 

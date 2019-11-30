@@ -23,6 +23,8 @@ void    destroy_sprite2(sfRenderWindow *window, sprite_t sprite)
     sfText_destroy(sprite.text_tuto_zombie);
     sfText_destroy(sprite.text_tuto_zombie_explication);
     sfText_destroy(sprite.setting);
+    sfText_destroy(sprite.display_score);
+    sfText_destroy(sprite.word_score);
 }
 
 void    destroy_sprite(sfRenderWindow *window, sprite_t sprite)
@@ -60,6 +62,8 @@ coords_t *coords, sfRenderWindow *window)
     sprites->setting = sfText_create();
     sprites->text_tuto_zombie = sfText_create();
     sprites->text_tuto_zombie_explication = sfText_create();
+    sprites->display_score = sfText_create();
+    sprites->word_score = sfText_create();
 }
 
 void    my_set_sprites(sprite_t *sprites, clock_d *clock, coords_t *coords, \

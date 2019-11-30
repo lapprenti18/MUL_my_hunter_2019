@@ -35,8 +35,9 @@ void    display_help_menu(sprite_t *sprite)
     sfVector2f option_key_position = {670, 120};
     char *text = "volume down press ->\n\nvolume up press ->\
     \n\nopen setting press ->\n\nclose setting press ->\
-    \n\nquit the game press ->";
-    char *key = "X\nC\nM\nQ\nm";
+    \n\nquit the game press ->\
+    \n\n\nback to home press ->";
+    char *key = "X\nC\nM\nQ\nm\nH";
 
     sfText_setString(sprite->text_option_text, text);
     sfText_setFont(sprite->text_option_text, sprite->font_option_text);

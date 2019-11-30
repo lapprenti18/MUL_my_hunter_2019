@@ -30,6 +30,28 @@ void    draw_statue(sfRenderWindow *window, sprite_t *sprite, coords_t *coords)
         draw_start_menu(window, sprite, coords);
 }
 
+void    display_score(sprite_t *sprite)
+{
+    sfVector2f score_position = {1070, 520};
+    sfVector2f word_position = {950, 520};
+    char *text = int_to_string(sprite->score);
+    char *word = "score :";
+
+    printf("score1 = %d\n", sprite->score);
+    printf("score2 =%s\n", int_to_string(sprite->score));
+    sfText_setString(sprite->display_score, text);
+    sfText_setFont(sprite->display_score, sprite->font_option_text);
+    sfText_setCharacterSize(sprite->display_score, 40);
+    sfText_setColor(sprite->display_score, sfRed);
+    sfText_setPosition(sprite->display_score, score_position);
+
+    sfText_setString(sprite->word_score, word);
+    sfText_setFont(sprite->word_score, sprite->font_option_text);
+    sfText_setCharacterSize(sprite->word_score, 40);
+    sfText_setColor(sprite->word_score, sfRed);
+    sfText_setPosition(sprite->word_score, word_position);
+}
+
 void    draw_sprite(sfRenderWindow *window, sprite_t *sprite, coords_t *coords)
 {
     sfVector2i mouse = sfMouse_getPositionRenderWindow(window);
@@ -45,6 +67,9 @@ void    draw_sprite(sfRenderWindow *window, sprite_t *sprite, coords_t *coords)
     sfRenderWindow_drawSprite(window, sprite->karim1, NULL);
     sfRenderWindow_drawSprite(window, sprite->karim2, NULL);
     sfRenderWindow_drawSprite(window, sprite->karim3, NULL);
+    display_score(sprite);
+    sfRenderWindow_drawText(window, sprite->display_score, NULL);
+    sfRenderWindow_drawText(window, sprite->word_score, NULL);
     sfRenderWindow_drawSprite(window, sprite->cursor, NULL);
     sfSprite_setPosition(sprite->cursor, mouse_2);
     sfRenderWindow_display(window);
@@ -62,6 +87,28 @@ void    display_menu_text(sprite_t *sprite)
     sfText_setPosition(sprite->text_game_over, game_over_position);
 }
 
+void    display_score_game_over(sprite_t *sprite)
+{
+    sfVector2f score_position = {550, 320};
+    sfVector2f word_position = {250, 320};
+    char *text = int_to_string(sprite->score);
+    char *word = "score :";
+
+    printf("score1 = %d\n", sprite->score);
+    printf("score2 =%s\n", int_to_string(sprite->score));
+    sfText_setString(sprite->display_score, text);
+    sfText_setFont(sprite->display_score, sprite->font_option_text);
+    sfText_setCharacterSize(sprite->display_score, 100);
+    sfText_setColor(sprite->display_score, sfYellow);
+    sfText_setPosition(sprite->display_score, score_position);
+
+    sfText_setString(sprite->word_score, word);
+    sfText_setFont(sprite->word_score, sprite->font_option_text);
+    sfText_setCharacterSize(sprite->word_score, 100);
+    sfText_setColor(sprite->word_score, sfYellow);
+    sfText_setPosition(sprite->word_score, word_position);
+}
+
 void    draw_game_over(sfRenderWindow *window, sprite_t *sprite, \
 coords_t *coords)
 {
@@ -73,6 +120,9 @@ coords_t *coords)
     display_menu_text(sprite);
     sfRenderWindow_drawText(window, sprite->text_game_over, NULL);
     sfSprite_setPosition(sprite->cursor, mouse_2);
+    display_score_game_over(sprite);
+    sfRenderWindow_drawText(window, sprite->display_score, NULL);
+    sfRenderWindow_drawText(window, sprite->word_score, NULL);
     sfRenderWindow_drawSprite(window, sprite->cursor, NULL);
     sfRenderWindow_display(window);
 }

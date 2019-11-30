@@ -60,6 +60,7 @@ void    reset_zombie_hard(coords_t *coords, sprite_t *sprite)
         sprite->zombie_heal = 3;
         coords->x = 1100;
         coords->y = line(line_random());
+        sprite->score += 1;
     }
 }
 

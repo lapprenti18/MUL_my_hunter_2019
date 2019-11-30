@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void    Event(sfRenderWindow *window, sfEvent event, coords_t *coords, \
+void    global_event(sfRenderWindow *window, sfEvent event, coords_t *coords, \
 sprite_t *sprite)
 {
     while (sfRenderWindow_pollEvent(window, &event)) {
@@ -31,8 +31,9 @@ sfRenderWindow *window, sprite_t *sprite)
 
     if (mouse.x <= coords->x + 68 && mouse.x >= coords->x \
     && mouse.y <= coords->y + 100 && mouse.y >= coords->y \
-    && sprite->statut == 2)
+    && sprite->statut == 2) {
         sprite->statut = 0;
+    }
     if (mouse.x <= 1100 && mouse.x >= 1000 && mouse.y <= 100 && mouse.y >= 0)
         sprite->statut = 3;
     if (mouse.x <= 935 && mouse.x >= 526 && mouse.y <= 453 && \
@@ -42,8 +43,11 @@ sfRenderWindow *window, sprite_t *sprite)
     mouse.y >= 473 && sprite->statut == 4)
         close_windows(window);
     if (mouse.x <= 928 && mouse.x >= 330 && mouse.y <= 328 && \
-    mouse.y >= 228 && sprite->statut == 4)
+    mouse.y >= 228 && sprite->statut == 4) {
         sprite->statut = 0;
+        sprite->mode_of_the_game = 0;
+        sprite->score = 0;
+    }
 }
 
 void    event_click2(sfMouseButtonEvent event, coords_t *coords, \
@@ -55,11 +59,13 @@ sfRenderWindow *window, sprite_t *sprite)
     mouse.y >= 351 && sprite->statut == 4) {
         sprite->statut = 0;
         sprite->mode_of_the_game = 1;
+        sprite->score = 0;
     }
     if (mouse.x <= 500 && mouse.x >= 101 && mouse.y <= 571 && \
     mouse.y >= 473 && sprite->statut == 4) {
         sprite->statut = 0;
         sprite->mode_of_the_game = 2;
+        sprite->score = 0;
     }
 }
 
@@ -74,6 +80,7 @@ sfRenderWindow *window, sprite_t *sprite)
         if (sprite->mode_of_the_game != 2) {
             coords->y = line(line_random());
             coords->x = 1100;
+            sprite->score += 1;
         }
         if (sprite->mode_of_the_game == 1)
             sprite->zombie_deplacement *= 1.2;
@@ -87,18 +94,9 @@ sfRenderWindow *window, sprite_t *sprite)
 
 }
 
-void    analyse_events(sfRenderWindow *window, sfEvent event, \
+void    key_press(sfRenderWindow *window, sfEvent event, \
 coords_t *coords, sprite_t *sprite)
 {
-    if (event.type == sfEvtClosed || event.key.code == sfKeyEscape)
-        close_windows(window);
-
-    if (event.type == sfEvtMouseButtonPressed)
-        manage_mouse_click(event.mouseButton, coords, window, sprite);
-    if (event.key.code == sfKeyR && sprite->statut == 1) {
-        sprite->statut = 0;
-        sprite->zombie_deplacement = 5;
-    }
     if (event.key.code == sfKeyX && sprite->volume > 5)
         sprite->volume -= 5;
     if (event.key.code == sfKeyC)
@@ -107,7 +105,9 @@ coords_t *coords, sprite_t *sprite)
         sprite->statut = 3;
     if (event.key.code == sfKeyQ && sprite->statut == 3)
         sprite->statut = 0;
-    if (event.key.code == sfKeyH)
+    if (event.key.code == sfKeyH) {
         sprite->statut = 4;
-    sfMusic_setVolume(sprite->music_game, sprite->volume);
+        sprite->zombie_deplacement = 5;
+        coords->x = 1100;
+    }
 }
