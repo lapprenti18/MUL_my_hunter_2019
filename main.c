@@ -21,6 +21,9 @@ void    initalise_value(sprite_t *sprite, sfIntRect *rect_zombie)
     rect_zombie->left = 0;
     sprite->volume = 100;
     sprite->statut = 4;
+    sprite->zombie_deplacement = 5;
+    sprite->mode_of_the_game = 0;
+    sprite->zombie_heal = 3;
 }
 
 void    display_man(sprite_t *sprite)

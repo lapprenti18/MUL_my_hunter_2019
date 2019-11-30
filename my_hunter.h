@@ -50,7 +50,9 @@ typedef struct sprite_c
     sfIntRect rect_heal;
     int statut;
     int volume;
-    int menu_opt;
+    float zombie_deplacement;
+    int mode_of_the_game;
+    int zombie_heal;
 } sprite_t;
 
 typedef struct clock_t
@@ -110,3 +112,5 @@ void    display_help_menu(sprite_t *sprite);
 void    my_setting(sprite_t *sprite);
 sfSprite    *my_menu_start(sfRenderWindow *window);
 void    draw_start_menu(sfRenderWindow *window, sprite_t *sprite, coords_t *coords);
+void    reset_zombie_easy_meduim(coords_t *coords, sprite_t *sprite);
+void    reset_zombie_hard(coords_t *coords, sprite_t *sprite);
