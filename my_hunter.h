@@ -14,6 +14,11 @@
 #include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <string.h>
+#include <unistd.h>
 
 typedef struct my_hunter
 {
@@ -48,6 +53,10 @@ typedef struct sprite_c
     sfText* text_tuto_zombie_explication;
     sfText* display_score;
     sfText* word_score;
+    sfText* hg_score_easy;
+    sfText* hg_score_medium;
+    sfText* hg_score_hard;
+    sfText* score_display;
     sfMusic* music_game;
     sfIntRect rect_heal;
     float zombie_deplacement;
@@ -56,6 +65,10 @@ typedef struct sprite_c
     int mode_of_the_game;
     int zombie_heal;
     int score;
+    int hight_score_easy;
+    int hight_score_medium;
+    int hight_score_hard;
+    char *char_score;
 } sprite_t;
 
 typedef struct clock_t
@@ -186,3 +199,19 @@ char *int_to_string(int num);
 void    display_score(sprite_t *sprite);
 
 void    display_score_game_over(sprite_t *sprite);
+
+void    display_hg_score(sprite_t *sprite);
+
+void easy(sprite_t *sprite);
+
+void medium(sprite_t *sprite);
+
+void hard(sprite_t *sprite);
+
+void score_display(sprite_t *sprite);
+
+int my_atoi(char *str);
+
+void    register_hg_score(sfRenderWindow *window, sprite_t *sprite);
+
+int    my_strlen(char const *str);

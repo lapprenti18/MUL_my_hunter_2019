@@ -20,8 +20,8 @@ void    draw_tuto_explication(sprite_t *sprite)
 {
     sfVector2f tuto_explication = {0, 0};
     char *text = "\t\t\tWelcome to my game everyone\
-    \n\nwhat is goal ? you see 3 little Karim ? SAVE HIM?!?\
-    \n\tNow kill zombie for stat game";
+    \n\nwhat is the goal ? you see 3 little Karim ? SAVE HIM?!?\
+    \n\tNow kill zombie to start game";
 
     sfText_setString(sprite->text_tuto_explication, text);
     sfText_setFont(sprite->text_tuto_explication, sprite->font_tuto);
@@ -33,7 +33,7 @@ void    draw_tuto_explication(sprite_t *sprite)
 void    draw_tuto_life(sprite_t *sprite)
 {
     sfVector2f tuto_life = {220, 520};
-    char *text = "<- you have 3 life be carefull !";
+    char *text = "<- you have 3 lives be carefull !";
 
     sfText_setString(sprite->text_tuto_life, text);
     sfText_setFont(sprite->text_tuto_life, sprite->font_tuto);
@@ -58,7 +58,7 @@ void    draw_tuto_zombie_explication(sprite_t *sprite)
 {
     sfVector2f tuto_zombie = {520, 260};
     char *text = "\t\tzombies will spawn here\
-    \n now click on the zombie for kill him";
+    \n now click on the zombie to kill him";
 
     sfText_setString(sprite->text_tuto_zombie_explication, text);
     sfText_setFont(sprite->text_tuto_zombie_explication, sprite->font_tuto);

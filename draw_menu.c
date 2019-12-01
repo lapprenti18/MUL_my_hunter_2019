@@ -60,6 +60,11 @@ coords_t *coords)
 
     sfRenderWindow_clear(window, sfBlack);
     sfRenderWindow_drawSprite(window, sprite->menu_start, NULL);
+    display_hg_score(sprite);
+    sfRenderWindow_drawText(window, sprite->hg_score_easy, NULL);
+    sfRenderWindow_drawText(window, sprite->hg_score_medium, NULL);
+    sfRenderWindow_drawText(window, sprite->hg_score_hard, NULL);
+    sfRenderWindow_drawText(window, sprite->score_display, NULL);
     sfRenderWindow_drawSprite(window, sprite->cursor, NULL);
     sfSprite_setPosition(sprite->cursor, mouse_2);
     sfRenderWindow_display(window);

@@ -25,6 +25,10 @@ void    initalise_value(sprite_t *sprite, sfIntRect *rect_zombie)
     sprite->mode_of_the_game = 0;
     sprite->zombie_heal = 3;
     sprite->score = 0;
+    sprite->rect_heal.left = 0;
+    sprite->hight_score_easy = 0;
+    sprite->hight_score_medium = 0;
+    sprite->hight_score_hard = 0;
 }
 
 void    display_man(sprite_t *sprite)

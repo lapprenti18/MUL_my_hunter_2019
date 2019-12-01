@@ -22,13 +22,16 @@ SRC	=	clock.c	\
 		sprite_start.c	\
 		analyse_event.c	\
 		int_to_string.c	\
+		read_best_score.c	\
+		high_score.c	\
+		statut_menu.c	\
 
 NAME	=	my_hunter
 
 OBJ	=	libmy.a
 
 all	:
-	gcc -o $(NAME) $(SRC) -lcsfml-graphics -lcsfml-audio -lcsfml-window -lcsfml-system
+	gcc -o $(NAME) $(SRC) -lcsfml-graphics -lcsfml-audio -lcsfml-window -lcsfml-system -g3
 
 clean	:
 	rm -f *.o $(OBJ)
