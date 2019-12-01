@@ -25,6 +25,7 @@ SRC	=	clock.c	\
 		read_best_score.c	\
 		high_score.c	\
 		statut_menu.c	\
+		while_main.c	\
 
 NAME	=	my_hunter
 

@@ -153,7 +153,7 @@ void    draw_tuto_life(sprite_t *sprite);
 
 void    draw_tuto_explication(sprite_t *sprite);
 
-void    display_man(sprite_t *sprite);
+void    display_man(int av, char **ac);
 
 void    initalise_value(sprite_t *sprite, sfIntRect *rect_zombie);
 
@@ -215,3 +215,5 @@ int my_atoi(char *str);
 void    register_hg_score(sfRenderWindow *window, sprite_t *sprite);
 
 int    my_strlen(char const *str);
+
+void    music(sprite_t *sprite, sfIntRect *rect_zombie, clock_d *Clock);

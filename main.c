@@ -31,9 +31,20 @@ void    initalise_value(sprite_t *sprite, sfIntRect *rect_zombie)
     sprite->hight_score_hard = 0;
 }
 
-void    display_man(sprite_t *sprite)
+void    display_man(int av, char **ac)
 {
-    sprite->statut = 2;
+    char *text = "retry with ./my_hunter -h";
+    char *text1 = "Hello everyone, if you want to kill zombies this game was \
+    meant for you.\n\nThe goal is to have the biggest score by killing zombies\
+    \n\nyou have 3 lives and you loose 1 each time the zombie touches the \
+    character\n\n there are 3 different levels easy/medium and hard\
+    \n\nnow good luck if you want more information you have the tutorial";
+
+    if (av != 2 || av == 2 && ac[1][0] != '-'&& ac[1][1] != 'h' \
+    && ac[1][2] != '\0')
+        write (1, text, 25);
+    else
+        write(1, text1, 342);
 }
 
 int    main(int ac, char **av)
@@ -47,12 +58,12 @@ int    main(int ac, char **av)
     clock_d Clock;
 
     my_set_sprites(&sprite, &Clock, &coords, window);
-    Clock.clock = sfClock_create();
-    sfMusic_play(sprite.music_game);
-    initalise_value(&sprite, &rect_zombie);
-    if (ac == 2)
-        display_man(&sprite);
+    music(&sprite, &rect_zombie, &Clock);
     while (sfRenderWindow_isOpen(window)) {
+        if (ac != 1) {
+            display_man(ac, av);
+            break;
+        }
         global_event(window, event, &coords, &sprite);
         my_clock(&rect_zombie, &coords, Clock, &sprite);
         draw_statue(window, &sprite, &coords);
