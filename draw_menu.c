@@ -47,7 +47,7 @@ void    display_help_menu(sprite_t *sprite)
     sfText_setString(sprite->text_option_key, key);
     sfText_setFont(sprite->text_option_key, sprite->font_option_key);
     sfText_setCharacterSize(sprite->text_option_key, 50);
-    sfText_setColor(sprite->text_option_key, sfBlack);
+    sfText_setColor(sprite->text_option_key, sfWhite);
     sfText_setPosition(sprite->text_option_key, option_key_position);
     my_setting(sprite);
 }

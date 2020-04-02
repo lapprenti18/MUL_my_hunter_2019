@@ -91,7 +91,6 @@ sfRenderWindow *window, sprite_t *sprite)
     }
     event_click1(event, coords, window, sprite);
     event_click2(event, coords, window, sprite);
-
 }
 
 void    key_press(sfRenderWindow *window, sfEvent event, \

@@ -20,6 +20,8 @@
 #include <string.h>
 #include <unistd.h>
 
+
+
 typedef struct my_hunter
 {
     int x;

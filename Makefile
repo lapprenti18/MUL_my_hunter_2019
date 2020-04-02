@@ -32,7 +32,7 @@ NAME	=	my_hunter
 OBJ	=	libmy.a
 
 all	:
-	gcc -o $(NAME) $(SRC) -lcsfml-graphics -lcsfml-audio -lcsfml-window -lcsfml-system -g3
+	gcc -o $(NAME) $(SRC) -lcsfml-graphics -lcsfml-audio -lcsfml-window -lcsfml-system
 
 clean	:
 	rm -f *.o $(OBJ)

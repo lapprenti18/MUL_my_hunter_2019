@@ -50,22 +50,25 @@ void    register_hg_score(sfRenderWindow *window, sprite_t *sprite)
     int fd;
 
     if (sprite->mode_of_the_game == 0) {
-        if (sprite->score > sprite->hight_score_easy)
+        if (sprite->score > sprite->hight_score_easy) {
             fd = open("score_easy", O_WRONLY);
             write(fd, sprite->char_score, my_strlen(sprite->char_score));
             close(fd);
+        }
     }
     else if (sprite->mode_of_the_game == 1) {
-        if (sprite->score > sprite->hight_score_medium)
+        if (sprite->score > sprite->hight_score_medium) {
             fd = open("score_medium", O_WRONLY);
             write(fd, sprite->char_score, my_strlen(sprite->char_score));
             close(fd);
+        }
     }
     else if (sprite->mode_of_the_game == 2) {
-        if (sprite->score > sprite->hight_score_hard)
+        if (sprite->score > sprite->hight_score_hard) {
             fd = open("score_hard", O_WRONLY);
             write(fd, sprite->char_score, my_strlen(sprite->char_score));
             close(fd);
+        }
     }
 }
 

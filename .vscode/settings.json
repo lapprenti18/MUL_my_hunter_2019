@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "joystickidentification.h": "c"
+        "joystickidentification.h": "c",
+        "my_hunter.h": "c",
+        "export.h": "c"
     }
 }

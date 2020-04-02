@@ -40,9 +40,9 @@ void    display_man(int av, char **ac)
     character\n\n there are 3 different levels easy/medium and hard\
     \n\nnow good luck if you want more information you have the tutorial";
 
-    if (av != 2 || av == 2 && ac[1][0] != '-'&& ac[1][1] != 'h' \
+    if (av != 2 || av == 2 && ac[1][0] != '-' && ac[1][1] != 'h' \
     && ac[1][2] != '\0')
-        write (1, text, 25);
+        write(1, text, 25);
     else
         write(1, text1, 342);
 }

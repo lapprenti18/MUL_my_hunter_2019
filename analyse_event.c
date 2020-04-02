@@ -27,6 +27,7 @@ coords_t *coords, sprite_t *sprite)
     if (event.key.code == sfKeyR && sprite->statut == 1) {
         sprite->statut = 0;
         sprite->zombie_deplacement = 5;
+        sprite->score = 0;
     }
     key_press(window, event, coords, sprite);
     sfMusic_setVolume(sprite->music_game, sprite->volume);
